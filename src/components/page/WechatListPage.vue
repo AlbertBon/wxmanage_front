@@ -6,6 +6,7 @@
             :tableData="tableData"
             :pageSizes="pageSizes"
             :columns="columns"
+            :pageSize="params.pageSize"
         ></table-page>
     </div>
 </template>
@@ -19,15 +20,7 @@ export default {
             code: 200,
             tableData: [],
             pageCount:10,
-            pageSizes:[5,10,20],
-        //   :fixed="column.fixed"
-        //   :prop="column.value"
-        //   :label="column.label"
-        //   :key="column.value"
-        //   :width="column.width"
-        //   :sortable="column.sortable"
-        //   :formatter="column.formatter"
-        //   :class-name="column.className"
+            pageSizes:[10,20],
             columns:[
                 {
                     label:"名称",
@@ -38,7 +31,11 @@ export default {
                     // formatter:"column.formatter",
                     className:"appName",
                 }
-            ]
+            ],
+            params:{
+                pageSize:5,
+                pageNum:2
+            }
         }
     },
     components: {
@@ -49,11 +46,11 @@ export default {
     },
     created() {
         console.log('加载wechatList')
-        axios.get('http://localhost:8081/wxmanage/wechat/wechatList')
-            .then(response => {
+        this.$axios.post('http://localhost:8081/wxmanage/wechat/wechatList',this.params)
+        .then(response => {
                 console.log(response)
                 this.response_code = response.data.response_code;
-                this.tableData = response.data.content;
+                this.tableData = response.data.content.list;
             })
     },
     methods: {

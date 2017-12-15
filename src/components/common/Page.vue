@@ -43,7 +43,7 @@
       data(){
         return {
           currentPage:1,
-          tpageSize:5,
+          tpageSize:10,
           
         }
       },

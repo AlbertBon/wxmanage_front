@@ -8,10 +8,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'    // 默认主题
 
 import axios from 'axios'
+axios.defaults.headers.post['Content-Type']='application/json';
+Vue.prototype.$axios = axios;
 
 Vue.use(ElementUI)
-
-Vue.prototype.$axios=axios;
 
 /* eslint-disable no-new */
 new Vue({

@@ -31,7 +31,7 @@
         :page-sizes="pageSizes"
         :page-size="tpageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="totalCount">
+        :total="pageCount">
       </el-pagination>
     </div>
   </div>
@@ -43,20 +43,19 @@
       data(){
         return {
           currentPage:1,
-          tpageSize:10,
-          
+          tpageSize:2,
         }
       },
       props:{
           rowClick:Function,
           tableData:Array,    //表格数据s
           columns:Array,      //表格列配置数据,{vlaue:对应数据对象中的属性，label：对应的是标题文字，className：对应的是列的样式类名}
-          totalCount:Number,  //表格数据总数
+          pageCount:Number,  //表格数据总数
           pageSizes:Array,    //决定每页显示的条数[10,15,20,25]
           checkBox:Boolean,  //决定是否显示复选框
           description:String, //分页脚底左侧的数据说明
           tableHeight:Number,  //分页列表的高度
-          pageSize:Number,
+          pageSize:Number,     //页面大小               
           sortChange:Function //用户点击列表头进行排序 { column, prop, order }
 
       },
@@ -79,7 +78,8 @@
     },
     computed:{
       curTableData(){
-            return this.tableData.slice((this.currentPage-1)*this.tpageSize,this.currentPage*this.tpageSize);
+            // return this.tableData.slice((this.currentPage-1)*this.tpageSize,this.currentPage*this.tpageSize);
+            return this.tableData;
         }
     }
   }
@@ -107,8 +107,8 @@
     position: relative;
     min-height: 60px;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
 
   }
   .el-table td, .el-table th {
